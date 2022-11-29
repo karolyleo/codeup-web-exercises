@@ -21,14 +21,14 @@
  * Test your function by passing various string literals to it and
  * console.logging the function's return value
  */
-function analyzeColor(name){
-    return name === 'red' ? "Strawberries are red"
-        :name=== 'orange' ? "Sunsets are sometimes orange"
-            :name=== 'yellow' ? "Bananas are yellow"
-                :name=== 'green' ? "Grass are green"
-                    :name === 'blue' ? "Oceans are blue"
-                        : "I don't know anything about " + name;
-}
+// function analyzeColor(name){
+//     return name === 'red' ? "Strawberries are red"
+//         :name=== 'orange' ? "Sunsets are sometimes orange"
+//             :name=== 'yellow' ? "Bananas are yellow"
+//                 :name=== 'green' ? "Grass are green"
+//                     :name === 'blue' ? "Oceans are blue"
+//                         : "I don't know anything about " + name;
+// }
 // Don't change the next two lines!
 // These lines create two variables for you:
 // - `colors`: a list of the colors of the rainbow

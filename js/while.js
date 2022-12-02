@@ -39,7 +39,7 @@ do {
     let clientBuy = ranNum(1, 5);    //Inside of the loop your code should generate another random number between 1 and 5, simulating the amount of cones being bought by her clients.
     if(clientBuy<=conesToSell){
     conesToSell -= clientBuy; //if there is enough cones to sell then the client can buy
-        console.log(`${clientBuy} cones sold... (I have ${conesToSell} left)`);//Use a do-while loop to log to the console the amount of cones sold to each person
+        console.log(`${clientBuy} cone${(clientBuy > 1)?'s':''} sold... (I have ${conesToSell} left)`);//Use a do-while loop to log to the console the amount of cones sold to each person
     if (conesToSell ===0) {
         console.log(`Yay! I sold them all!`);
     }

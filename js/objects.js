@@ -155,3 +155,50 @@ function createBook(title, author) {
     }
     console.log(createBook('The Story of my Life', "Leonard Karoly"))
 })();
+/*=============================
+Create a few beverage objects and assign values to each object for the following properties:
+  - brandName
+  - type
+  - volumeInLiters
+  - priceInCents
+  - expirationDate
+  - datesOfPreviousSips (use an array of strings)
+  - isOpen
+Define your objects using both literal syntax to create all properties and values at once and also try defining empty objects and assign property values in separate statements using the dot notation.
+ */
+let drinks = [{
+    brandName: 'Starbucks',
+    type: 'Coffee',
+    volume: '.5 L',
+    priceInCents: 500,
+    expirationDate: 'When it cools off',
+    datesOfPreviousSips : ['This morning', 'yesterday', 'day before yesterday'],
+    isOpen: 'No'
+}]
+// -- Mini Exercise 2
+const users = [
+    {
+        givenName: 'Sam',
+        age: 21
+    },
+    {
+        givenName: 'Cathy',
+        age: 34
+    },
+    {
+        givenName: 'Karen',
+        age: 43
+    }
+];
+//
+// 0. Log each given name
+let names = users.map(user=>user.givenName); console.log(names)
+// 1. Log the names of all users in a single console log separated by spaces. // output = "Sam Cathy Karen"
+console.log(names.join(' '))
+// 2. Change the names of all users to "John Doe"
+users.map(user=>(user.givenName = 'John Doe'))
+console.log(users)
+// 3. Increase the current age of all users by 1
+users.map(user=>(user.age+=1));
+console.log(users);
+// Can you accomplish each step using iteration?

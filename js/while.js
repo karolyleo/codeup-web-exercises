@@ -53,3 +53,22 @@ function ranNum(min, max) {      //inspired by mdn_web_docs url- https://develop
     max = Math.floor(max);     //define max and min
     return Math.floor(Math.random() * (max - min + 1) + min);   // The max and min are inclusive
 }
+
+
+let num = 9
+let art = ['This is my art', '\n']
+
+
+for(let i=1;i<=num;i++) {
+    if ((i <= (num / 2))) {
+        for (let h = 1; h <= i; h++) {
+            art.push(' ');
+        }
+    } else {
+        for (let h = Math.round(num / 2); h >= 0; h--) {
+            art.push(' ');
+        }
+        art.push(i, '\n');
+    }
+}
+    console.log(art.join(' '))

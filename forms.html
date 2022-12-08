@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register With Us</title>
+</head>
+<body>
+<form method="POST" action="https://request-inspector.glitch.me/">
+  <section class="part5">
+  <label for="email">EMail</label>
+  <input id="username" name="username" type="text">
+  <br>
+  <label for="password">Password</label>
+  <input id="password" name="password" type="text">
+  </section>
+  <br>
+  <section class="part6">
+    <label>
+      <textarea>Fill out a short description of yourself.</textarea>
+    </label>
+    <br>
+  </section>
+  <br>
+  <section class="part7">
+    <p1>How'd you hear about us?</p1> <br>
+    <input type="radio" name="questionaire_1" value="Billboard">Billboard<br>
+    <input type="radio" name="questionaire_2" value="Radio Advertisement">Radio Advertisement<br>
+    <input type="radio" name="questionaire_3" value="Internet Advertisement">Internet Advertisement<br>
+    <input type="radio" name="questionaire_4" value="Other">Other<br>
+<!--What happens if the inputs are given different name attributes?
+If the inputs are given different names, then they push the user's decision towards different locations, rather than all together.
+
+Change these inputs so that multiple answers are allowed to be selected.
+They cant be unselected
+    -->
+  </section>
+  <br>
+  <section class="part8">
+    <p name="Platform_user_is_using">What web browser are you using?</p>
+    <select name="Platform_user_is_using">
+      What web browser are you using?
+      <option value="chrome">Chrome</option>
+      <option value="firefox">Firefox</option>
+      <option value="safari">Safari</option>
+      <option value="internetexplorer">Internet Explorer</option>
+      <option value="other">Other</option>
+    </select>
+    <br>
+    <br>
+    <button name="submit">Submit</button>
+  </section>
+</form>
+</body>
+</html>

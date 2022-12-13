@@ -1,0 +1,17 @@
+/*
+multi
+line
+comment
+*/
+
+.fancy-header {
+  color: purple; /* single line comment */
+  text-decoration: underline;
+}
+/*
+What color is the h1 after making this change? Remove your embedded stylesheet and view the page again.
+A-The h1 becomes purple, and then reverts back to black once the stylesheet is removed.
+What do the above exercises tell you about the precedence of style attributes and embedded and external stylesheets?
+A-The above excersies show me that the CSS allows for the HTML to be customized on a much more organizled level, and across mutliple classes rather than having to repeat 99999x.
+All embedded style sheet is removed.
+ */

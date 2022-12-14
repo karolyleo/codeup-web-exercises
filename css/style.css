@@ -4,9 +4,45 @@ line
 comment
 */
 
-.fancy-header {
-  color: purple; /* single line comment */
+/*.fancy-header {*/
+/*  color: purple; !* single line comment *!*/
+/*  text-decoration: underline;*/
+/*}*/
+header {
+  text-align: center;
+}
+.bullets {
+  background-image: url("../img/high-five.jpeg");
+  background-size: 600px;
+}
+h1,h2{
+  color: saddlebrown;
   text-decoration: underline;
+}
+body{
+  background-color: lightgray;
+}
+.fancybullet{
+  list-style: square;
+}
+.orderIsNeeded{
+  list-style: upper-roman;
+}
+html {
+  font-family: monospace;
+}
+table{
+  padding: 20px;
+}
+.top :hover{
+  background-color: greenyellow;
+  font-family: "Wingdings 3";
+}
+.top :visited{
+  text-decoration-thickness: 90px;
+}
+.top{
+  text-decoration-color: rosybrown;
 }
 /*
 What color is the h1 after making this change? Remove your embedded stylesheet and view the page again.

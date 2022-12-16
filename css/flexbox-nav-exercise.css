@@ -1,0 +1,64 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-color: white;
+    margin: 0;
+}
+/* Begin setting a flex box for all of the navbar*/
+.navbar{
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(193,193,193);
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    margin: auto;
+}
+.relevant-links {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    padding: .5em 0;
+}
+.miscellaneous {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+/*for CSS properties concerning specific elements*/
+div.title>p{
+    font-size: 3em;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+}
+div {
+    padding-top: .2em;
+    padding-bottom: .2em;
+}
+img {
+    height: .9em;
+}
+p {
+    margin: 0;
+    padding: 0;
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 900;
+    font-size: .80em;
+}
+/*.sub {*/
+/*    padding: 0 .5em;*/
+/*}*/
+/*This is where I struggled with anchor tags*/
+a {
+    color: black;
+    text-decoration: none;
+    display:inline-block;
+    padding: .5em;
+}
+a:hover {
+    color: blue;
+    font-size: 1em;
+}

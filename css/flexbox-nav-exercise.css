@@ -31,7 +31,7 @@ body{
 /*for CSS properties concerning specific elements*/
 div.title>p{
     font-size: 3em;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Ub', sans-serif;
     font-weight: 300;
 }
 div {

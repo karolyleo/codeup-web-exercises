@@ -24,41 +24,56 @@
     pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
     culpa qui officia deserunt mollit anim id est laborum.
 </p>
-
+<button id="btn1">Change Main Header</button>
+<button id="btn2">Change SubHeader Color</button>
+<button id="btn3">Change List Item Color</button>
+<button id="btn4">Change Paragraph</button><br>
+<button onclick="history.go(0);">Reset</button>
 <script>
     (function() {
         "use strict";
         // TODO: Uncomment next line and get the main header element by id
         var mainHeader = document.getElementById('main-header');
 
-        // TODO: Set inner html of mainHeader to "JavaScript is Cool
-        mainHeader.innerHTML = 'JavaScript is Cool';
+        // TODO: Set inner html of mainHeader to "JavaScript is Cool **button 1**
+        const mainChange = () => mainHeader.innerHTML = 'JavaScript is Cool';
+
+        var btn1 = document.getElementById('btn1');
+        btn1.addEventListener('click', mainChange); //added 1st button
 
         // TODO: Uncomment the next line and get the sub header element by id
         var subHeader = document.getElementById('sub-header');
 
-        // TODO: Set the text color of subHeader to blue
-        subHeader.style.color = 'blue';
+        // TODO: Set the text color of subHeader to blue **button 2**
+        const changeSub = () => subHeader.style.color = 'blue';
+
+        var btn2 = document.getElementById('btn2');
+        btn2.addEventListener('click', changeSub); //added 2nd button
 
         // TODO: Uncomment the next line and get all list items
         var listItems = document.getElementsByTagName('li');
 
-        // TODO: Set text color on every other list item to grey
-        //every other means it starts on the 2nd element in the array.
-        for(let i=1; i < listItems.length; i+=2) {
+        // TODO: Set text color on every other list item to grey **button 3**
+        const changeLi = () => {
+            for (let i = 1; i < listItems.length; i += 2) { //every other means it starts on the 2nd element in the array.
                 listItems[i].style.color = 'grey';// the '+1' is so it begins on that second element.
+            }
+            // TODO: Set text color of li with dbid = 1 to blue **button 3**
+            // if(listItems[i].getAttribute("data-dbid") === '1') {listItems[i].style.color = 'blue';}
+            // used inside the above loop
+            document.querySelector('[data-dbid="1"]').style.color = "blue";
         }
-        // TODO: Set text color of li with dbid = 1 to blue
-        // if(listItems[i].getAttribute("data-dbid") === '1') {listItems[i].style.color = 'blue';}
-        // used inside the above loop
-        document.querySelector('[data-dbid="1"]').style.color = "blue";
+        var btn3 = document.getElementById('btn3');
+        btn3.addEventListener('click', changeLi); //added 3rd button
 
         // TODO: Uncomment the next line and get all elements with class name sub-paragraph
         // let subParagraphs = document.getElementsByClassName('sub-paragraph');
         let subParagraphs = document.getElementsByClassName('sub-paragraph');
 
-        // TODO: Change the text in the first sub paragraph to "Mission Accomplished!"
-        subParagraphs[0].innerHTML = 'Mission Accomplished!';
+        // TODO: Change the text in the first sub paragraph to "Mission Accomplished!" **button 4**
+        const changePara = () => subParagraphs[0].innerHTML = 'Mission Accomplished!';
+        var btn4 = document.getElementById('btn4');
+        btn4.addEventListener('click', changePara); //added 4th button
     })();
 </script>
 </body>

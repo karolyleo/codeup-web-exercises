@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tic-Tac-Toe Game</title>
+    <style>
+        /*Set the background color of the body */
+        body {
+            background-color: #f1f1f1;
+        }
+        /* Style the table*/
+        table {
+            margin: 0 auto; /* center the table*/
+            background-color: #fff; /* set the background color of the table */
+            border-collapse: collapse; /* remove the border spacing of the table */
+            /*height: 100vh;*/
+        }
+        /* Style the table cells */
+        td {
+            width: 33.33%; /* set the width of the cells to take 1/3 of the table */
+            height: 33.33%; /* set the height of the cells to take 1/3 of the table */
+            border: 1px solid #ccc; /* set the border of the cells */
+            text-align: center; /* center the text */
+            font-size: 50px; /* set the font size of the text */
+            cursor: pointer; /* change the cursor when hover */
+        }
+        /* Style the X player*/
+        td.x {
+            color: #F44336;
+        }
+        /* Style the O player*/
+        td.o {
+            color: #3F51B5;
+        }
+    </style>
+</head>
+<body>
+<table id="game">
+    <tr>
+        <td id="0"></td>
+        <td id="1"></td>
+        <td id="2"></td>
+    </tr>
+    <tr>
+        <td id="3"></td>
+        <td id="4"></td>
+        <td id="5"></td>
+    </tr>
+    <tr>
+        <td id="6"></td>
+        <td id="7"></td>
+        <td id="8"></td>
+    </tr>
+</table>
+<script>
+
+    "use strict";
+    let player = "X", cells = document.querySelectorAll("td"), isDraw = false;
+
+    for (let i = 0; i < cells.length; i++) {
+        cells[i].addEventListener("click", function() {
+            if (this.textContent === "" && !isDraw) {
+                this.textContent = player;
+                checkForWin();
+                player = (player === "X") ? "O" : "X";
+            }
+        });
+    }
+
+    function checkForWin() {
+        let winCombos = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
+        for(let i = 0; i < winCombos.length; i++){
+            if(cells[winCombos[i][0]].textContent === player && cells[winCombos[i][1]].textContent === player && cells[winCombos[i][2]].textContent === player){
+                alert("Player " + player + " wins!");
+                return;
+            }
+        }
+
+        for (let i = 0; i < cells.length; i++) {
+            if (cells[i].textContent === "") {
+                return;
+            }
+        }
+        isDraw = true;
+        alert("It's a draw!");
+    }
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+

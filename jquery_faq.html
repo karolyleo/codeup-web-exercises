@@ -10,6 +10,15 @@
         .highlight {
             background-color: yellow;
         }
+        img {
+            height: 300px;
+            width: 200px;
+            padding: 10px;
+            background-color: saddlebrown;
+        }
+        footer > button {
+            margin-left: 85px;
+        }
     </style>
 </head>
 <body>
@@ -118,6 +127,30 @@
     <li>It is a popular destination for hiking, rock climbing, and canyoneering.</li>
 </ul>
 <button id="addYellow">Yellow Background?</button>
+<h1 style="text-align: center">jQuery Traversing</h1>
+<section id="imageSwap" style="display: flex; flex-direction: row; justify-content: space-evenly">
+<div>
+    <img src="https://m.media-amazon.com/images/I/61QuO004GSL.__AC_SX300_SY300_QL70_FMwebp_.jpg">
+    <footer>
+        <button id="swapLeft">swap</button>
+    </footer>
+</div>
+<div>
+    <img src="https://i.pinimg.com/736x/ec/1d/3c/ec1d3c8717a4c9a860fb1fe697bb5ed6--landscape-art-iceberg.jpg">
+    <footer>
+        <button id="swapMiddle">swap</button>
+    </footer>
+</div>
+<div>
+    <img src="https://preview.redd.it/vf16axrscr761.jpg?auto=webp&s=43514724df30c338f30f10ba73770bebfe16c3d1">
+    <footer>
+        <button id="swapRight">swap</button>
+    </footer>
+</div>
+</section>
+<p style="text-align: center">The left frame swaps to the right and takes the image from the frame in the center.</p>
+<p style="text-align: center">The center frame swaps randomly to either the left or right.</p>
+<p style="text-align: center">The right frame swaps to the left and takes the image from the frame in the center.</p>
 <script type="text/javascript" src="JQuery/jquery-3.6.3.js"></script>
 <script>
     "use strict";
@@ -129,13 +162,39 @@
         $('ul li:last-child').toggleClass('highlight');
     });
     $('h3').click(function(){
-        $(this).next('ul').find('li').css({fontWeight: 'bold'});
+        $(this)
+            .next('ul')
+            .find('li')
+            .css({fontWeight: 'bold'});
     });
     $('li').click(function(){
-        $(this).parent().children().first().css({color: 'blue'});
+        $(this)
+            .parent()
+            .children()
+            .first()
+            .css({color: 'blue'});
     });
 
-    //    font-weight: bold
+    $('#swapLeft').click(function(){
+        let helperImg = $(this).parent().parent().find('img');
+        $(this).parent().parent().find('img').replaceWith($(this).parent().parent().next().find('img'));
+        $(this).parent().parent().next().prepend(helperImg);
+    });
+    $('#swapRight').click(function(){
+        //firstParent (Footer), secondParent (div), thirdParent (ContainerDiv)
+        let helperImg = $(this).parent().parent().find('img');
+        $(this).parent().parent().find('img').replaceWith($(this).parent().parent().parent().children().first().next().find('img'));
+        $(this).parent().parent().parent().children().first().next().prepend(helperImg);
+    });
+    $('#swapMiddle').click(function(){
+        let helper = randomNum();
+        (helper % 2 === 0)? $('#swapLeft').trigger('click') : $('#swapRight').trigger('click');
+    });
+
+//    Helpful/ extra functions
+    function randomNum() {
+        return Math.floor(Math.random() * 10) + 1;
+    }
 </script>
 </body>
 </html>

@@ -2,12 +2,12 @@
 <html>
 <head>
     <title>Online Store</title>
+    <link href="./bootstrap-grid-example_files/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
-<body>
+<body class="text-center text-white bg-secondary">
 
-<h1>My Tool Store</h1>
-
-<table id="products">
+<h1 class="border border-secondary rounded p-3 shadow ">My Tool Store</h1>
+<table id="products" class="table table-dark table-striped">
     <thead>
         <tr>
             <th>Title</th>
@@ -18,30 +18,41 @@
     </thead>
     <tbody id="insertProducts"></tbody>
 </table>
-
+<button id="refresh" type="button" class="btn btn-dark">Refresh</button>
+<button id="clear" type="button" class="btn btn-danger">Clear</button>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 
 <script>
 (function() {
     "use strict";
     // TODO: Create an AJAX GET request for the file under data/inventory.json
-$.ajax('./data/inventory.json').done(function(data){
-    eachItem(data);
+// $.ajax('./data/inventory.json').done(function(data){
+//     eachItem(data);
+// });
+
+$('#refresh').click(function(){
+    $('#insertProducts').empty();
+    $.ajax('./data/inventory.json').done(function(data){eachItem(data)});
 });
+$('#clear').click(function(){
+    $('#insertProducts').empty();
+})
     //TODO: Take the data from inventory.json and append it to the products table
-    //       HINT: Your data should come back as a JSON object; use console.log() to inspect
-    //             its contents and fields
-function eachItem(data){
-        data.forEach((item, index)=>{addHTML(item, index); console.log(item)});
+function eachItem(data){  //HINT:Your data should come back as a JSON object;
+                         // use console.log() to inspect its contents and fields
+data.forEach((item, index)=>{
+    addHTML(item, index);
+    // console.log(item)
+    });
 }
-    //       HINT: You will want to target #insertProducts for your new HTML elements
-    function addHTML(data, index){
+
+    function addHTML(data, index){      //HINT: You will want to target #insertProducts for your new HTML elements
         $('#insertProducts').append(`
         <tr id="product${index+1}">
             <td>${data.title}</td>
             <td>${data.quantity}</td>
-            <td>${data.price}</td>
-            <td>${data.categories.join(' / ')}</td>
+            <td>$${data.price.toFixed(2)}</td>
+            <td>${data.categories.join(' | ')}</td>
         </tr>`);
     }
 })();

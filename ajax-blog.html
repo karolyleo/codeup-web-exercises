@@ -29,7 +29,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <script>
     "use strict"
-    let originalText = [];
+    let originalText = [], originalDate = [];
     //button function so it populates AFTER it's pressed
     $('#refresh').click(function(){
         $('#blogs').empty();
@@ -48,8 +48,18 @@
         let section = $(this).parent().parent().parent(),
             div = $(this).parent().parent(),
             current = $(this); // the term "this" is changed once ajax is ran.. so I need to store this beforehand
-        let i = (section.children().index(div));
-        // console.log(originalText[i])
+        let i = (section.children().index(div)); // console.log(originalText[i])
+        let readmeText = $(this).text();
+        switch(readmeText){
+            case "Read more":
+                $(this).text('Read less');
+                break;
+            case 'Read less':
+                $(this).text("Read more");
+                break;
+            default:
+                console.log("welp that didn't work");
+        }
         $.ajax('./data/blog.json').done(function(data){
             let fullMsg = data[i].content;
             if (current.parent().children('p').text() === originalText[i]) {
@@ -59,7 +69,47 @@
             } //should've use the text-truncate class from bootstrap and toggled the class on button press...
         });
     });
+    //button for the date
+    // $(document).on('click', 'button.dateStuff', function(){
+    //     let dateFormat = $(this).text();
+    //     switch(dateFormat){
+    //         case "January 25, 2015":
+    //             $(this).text('01/25/2015');
+    //             break;
+    //         case '01/25/2015':
+    //             $(this).text("January 25, 2015");
+    //             break;
+    //         case "February 14, 2015":
+    //             $(this).text("02/14/2015")
+    //             break;
+    //         case "02/14/2015":
+    //             $(this).text("February 14, 2015")
+    //             break;
+    //         case "January 29, 1845":
+    //             $(this).text("01/29/1845")
+    //             break;
+    //         case "01/29/1845":
+    //             $(this).text("January 29, 1845")
+    //             break;
+    //         default:
+    //             console.log("welp that didn't work");
+    //     }
+    // });
+    //better button
+    $(document).on('click', 'button.dateStuff', function(){
+        let dateFormat = $(this).text();
+        let date = new Date(dateFormat); // parse date string
+        if (isNaN(date.getTime())) { // check if date string is not in a valid format
+            console.log("Invalid date format");
+            return;
+        }
 
+        if(dateFormat.match(/^\d{1,2}\/\d{1,2}\/\d{4}$/)){ // check if date is in MM/DD/YYYY format
+            $(this).text(date.toLocaleDateString('en-US', {month: 'long', day: 'numeric', year: 'numeric'})); // format date to January 25, 2015
+        }else{
+            $(this).text(date.toLocaleDateString('en-US', {month: '2-digit', day: '2-digit', year: 'numeric'})); // format date to 01/25/2015
+        }
+    });
 
     //   ---------HELPER FUNCTIONS TO SOOTH MY 'OCD'---------
     //The HTML format that is needed
@@ -71,7 +121,7 @@
                 <h5 class="card-title">${oneStr(data.categories)}</h5>
             <p class="card-text">${data.content.slice(0, 50)}...</p>
             <button class="reading btn btn-dark">Read more</button>
-            <button class="btn btn-primary text-white-50">${data.date}</button>
+            <button class="dateStuff btn btn-primary text-white-50">${data.date}</button>
             </div>
         </div>
         `);

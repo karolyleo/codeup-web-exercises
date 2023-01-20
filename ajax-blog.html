@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BootstrapBlog</title>
+  <link href="./bootstrap-grid-example_files/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+</head>
+<body class="bg-info text-white">
+<div class="border border-secondary rounded p-3 shadow d-flex flex-row justify-content-center">
+<h1>Step into the World of my Thoughts</h1>
+    <p>By Leonard Karoly</p>
+</div>
+<section id="blogs">
+<!--    This was the template I based my ajax to be modified on-->
+<div id="example" class="card bg-primary mb-4">
+    <h5 class="card-header">Title</h5>
+    <div class="card-body">
+        <h5 class="card-title">Categories</h5>
+        <p class="text-truncate card-text">The excessively long content that means nothing goes in this general area. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cup</p>
+        <button class="btn btn-dark">Read more</button>
+        <button class="date btn btn-primary text-white-50">January 25, 2015</button>
+    </div>
+</div>
+</section>
+<div id="buttons" class="text-center">
+    <button id="refresh" class="btn btn-success">Refresh</button>
+    <button id="clear" type="button" class="btn btn-danger">Clear</button>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script>
+    "use strict"
+    let originalText = [];
+    //button function so it populates AFTER it's pressed
+    $('#refresh').click(function(){
+        $('#blogs').empty();
+        $.ajax('./data/blog.json').done(function(data){
+            data.forEach(function(obj, index){
+                addHTML(obj, index);
+            });
+        });
+    });
+    //button function so clears everything
+    $('#clear').click(function(){
+        $('#blogs').empty();
+    });
+    //button that expands the content of the card
+    $(document).on('click', 'button.reading', function(){ //**NOTE** The button is added to the DOM via JavaScript after the page loads: If a button is being added to the DOM via JavaScript after the page loads, the jQuery code will not be able to find the button when it is executed because the button does not exist in the DOM yet.
+        let section = $(this).parent().parent().parent(),
+            div = $(this).parent().parent(),
+            current = $(this); // the term "this" is changed once ajax is ran.. so I need to store this beforehand
+        let i = (section.children().index(div));
+        // console.log(originalText[i])
+        $.ajax('./data/blog.json').done(function(data){
+            let fullMsg = data[i].content;
+            if (current.parent().children('p').text() === originalText[i]) {
+                current.parent().children('p').text(`${fullMsg}`);
+            } else {
+                current.parent().children('p').text(`${originalText[i]}`);
+            } //should've use the text-truncate class from bootstrap and toggled the class on button press...
+        });
+    });
+
+
+    //   ---------HELPER FUNCTIONS TO SOOTH MY 'OCD'---------
+    //The HTML format that is needed
+    function addHTML(data, index){
+        $('#blogs').append(`
+        <div id="blog${index+1}" class="card bg-primary mb-4">
+            <h5 class="card-header">${data.title}</h5>
+            <div class="card-body">
+                <h5 class="card-title">${oneStr(data.categories)}</h5>
+            <p class="card-text">${data.content.slice(0, 50)}...</p>
+            <button class="reading btn btn-dark">Read more</button>
+            <button class="btn btn-primary text-white-50">${data.date}</button>
+            </div>
+        </div>
+        `);
+        originalText.push(`${data.content.slice(0, 50)}...`)
+    }
+    //Nice-r oneStr for the categories
+    function oneStr(array){
+        return array
+            .map((obj)=> {
+                return obj[0].toUpperCase() + obj.slice(1);
+            })
+            .join(' | ')
+    }
+</script>
+</body>
+</html>

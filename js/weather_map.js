@@ -6,7 +6,7 @@ $.get("http://api.openweathermap.org/data/2.5/weather", {
     units: "imperial"
 }).done(function(data) {
     updateToday(data);
-    console.log(data.daily[1])
+    console.log(data.daily)
     // console.log(data);
 });
 $.get("http://api.openweathermap.org/data/2.5/forecast", {
@@ -16,7 +16,7 @@ $.get("http://api.openweathermap.org/data/2.5/forecast", {
     units: "imperial"
 }).done(function(data) {
     weeklyWeather = data
-    console.log('5 day forecast', data);
+    updateWeekly(data.list)
 });
 
 let latLongSA = [-98.4916, 29.4252]
@@ -48,4 +48,32 @@ function updateToday(info){
 //updating third card
 function updateWeekly(weeklyInfo){
     $('#weeklyTemp').empty()
+    for(let i=0; i<weeklyInfo.length;i+=8){
+        let date = weeklyInfo[i].dt_txt.split(' '),
+            temp = weeklyInfo[i].main.temp.toFixed(0),
+            dayOfTheWeek = getDayAbbr(date[0]);
+        $('#weeklyTemp').append(`
+        <div class="flex-column p-1">
+          <p class="small"><strong>${temp}°F</strong></p>
+          <p class="mb-0"><strong>${dayOfTheWeek}</strong></p>
+        </div>
+        `)
+    }
+}
+
+//Turns '2023-01-24' format into 'tues'
+function getDayAbbr(date) {
+    let daysAbbr = {
+        "Sun": "Sun",
+        "Mon": "Mon",
+        "Tue": "Tue",
+        "Wed": "Wed",
+        "Thu": "Thu",
+        "Fri": "Fri",
+        "Sat": "Sat"
+    }
+    let dateObject = new Date(date);
+    let options = { timeZone: 'UTC', weekday: 'short'};
+    let day = new Intl.DateTimeFormat('en-US', options).format(dateObject);
+    return daysAbbr[day];
 }

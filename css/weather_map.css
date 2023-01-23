@@ -1,0 +1,18 @@
+.gradient-custom {
+    /* Chrome 10-25 */
+    background: -webkit-linear-gradient(to right, rgba(255, 255, 255, 1), rgba(255, 236, 210, 1));
+
+    /* Chrome 26+ */
+    background: linear-gradient(to right, rgba(255, 255, 255, 1), rgba(255, 236, 210, 1))
+}
+
+#map {
+    /* the width and height may be set to any size */
+    height: 75%;
+    width: 75%;
+    flex-grow: 1;
+}
+
+.rounded-custom {
+    border-radius: 25px;
+}

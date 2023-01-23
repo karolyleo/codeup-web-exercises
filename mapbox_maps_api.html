@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>First Mapbox Map</title>
+
+    <!-- Mapbox CSS -->
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet' />
+
+    <!--     Linked custom css-->
+    <link href="css/reset.css" rel="stylesheet"/>
+
+    <!-- Custom CSS -->
+    <style>
+        #map {
+            /* the width and height may be set to any size */
+            width: 100%;
+            flex-grow: 1;
+        }
+        header.container {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.78);
+        }
+        main.container, main.container>.row {
+            padding: 0;
+            flex-grow: 1;
+            column-gap: 0px;
+        }
+        aside.column {
+            width: 300px;
+            flex: none;
+        }
+        button {
+            background-color: transparent;
+            border-radius: 3rem;
+        }
+        img{
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="page-wrapper">
+    <header class="container">
+        <div class="row full-width">
+            <div class="column">Welcome to a Mapbox</div>
+            <div class="column">
+
+            </div>
+        </div>
+    </header>
+    <main class="container">
+        <div class="row full-width">
+            <aside class="column">
+                <button id="zoom">Magnifier</button>
+                <section id="leftSide">
+<!--                    For Inputted Data-->
+                </section>
+            </aside>
+            <div class="column">
+                <!-- The HTML element that serves as the Mapbox container -->
+                <div id='map'></div>
+            </div>
+        </div>
+    </main>
+</div>
+
+
+
+<!--Keys-->
+<script src="js/keys.js"></script>
+<!-- Mapbox Geocoder Util Methods-->
+<script src="js/mapbox-geocoder-utils.js"></script>
+<!-- Mapbox JS -->
+<script src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js'></script>
+<!-- JQuery    -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<!-- Custom JS -->
+<script>
+
+    mapboxgl.accessToken = keys.mapbox;// easier access to my key
+    let map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/karolleo000/cld4y1x89000i01mlfdny8hes',
+        zoom: 10,
+        center: [-98.4916, 29.4252] //starting position
+    })
+
+    let favRestaurants = [
+        {
+            name: 'Fogo de chao',
+            image: 'img/FogoDeChao.jpeg',
+            address: '8250 Westheimer Rd, Houston, TX 77063',
+            category: 'Brazilian Steak House'
+        },
+        {
+            name: 'Dimassi\'s',
+            image: 'img/Dimassi.jpeg',
+            address: '10811 Westheimer Rd, Houston, TX 77042',
+            category: 'Mediterranean Buffet'
+        },
+        {
+            name: 'Jonathan\'s The Rub',
+            image: 'img/JonathansTheRub.png',
+            address: '12505 Memorial Dr #140, Houston, TX 77024',
+            category: 'Southern Comfort'
+        }
+    ] //My favorite resturant
+    leftsideHTML(favRestaurants)
+    let buttonCount = 1;//keep track of the magnifying presses
+
+    //for finding the lat/long
+    // geocode("10811 Westheimer Rd, Houston, TX 77042", keys.mapbox).then(function(result) {
+    //     console.log(result);
+    //     map.setCenter(result);
+    //     map.setZoom(20);
+    // });
+
+
+//Keeping functions at the end
+    //function that is totally not for zoom... yes it is
+    $(document).on('click', '#zoom', function(){
+        // console.log(buttonCount)
+        if(buttonCount % 3 === 0){
+            buttonCount = 2
+            map.setZoom(20)
+        } else if(buttonCount % 2 === 0){
+            buttonCount = 1
+            map.setZoom(15)
+        } else {
+            buttonCount = 3
+            map.setZoom(10)
+        }
+    })
+
+    function leftsideHTML(objs){
+        let HTML= '';
+        objs.forEach(obj=>{
+            geocode(obj.address, keys.mapbox).then(function(result) {
+                markFavLocation(result)
+            });
+            HTML += `
+    <div id="${obj.name.toLowerCase().replace(/'/, '').split(' ').join('-')}">
+    <img src="${obj.image}"/>
+    <h5>${obj.name}</h5>
+    <p>${obj.address}</p>
+    <h6>${obj.category}</h6>
+    <button id="${obj.name.toLowerCase().replace(/'/, '').split(' ').join('-')}" class="checkingLocation">~~~Check it out!~~~</button>
+    </div>
+        `;
+        })
+        $('#leftSide').html(HTML)
+    }
+
+    $(document).on('click', '.checkingLocation', function(){
+        let address =$(this).parent().children('p').text()
+        // console.log(address)
+
+        geocode(address, keys.mapbox).then(function(result) {
+                // console.log(result);
+                map.setCenter(result);
+                map.setZoom(14);
+            });
+    });
+
+    //for the Marker & popup
+    function markFavLocation(coords){
+        let favMarker = new mapboxgl.Marker()
+            .setLngLat([coords[0], coords[1]])
+            .addTo(map);
+        let popup = new mapboxgl.Popup()
+            .setLngLat([coords[0], coords[1]])
+            .setHTML("<p>This is a good one!</p>")
+            .addTo(map);
+    }
+</script>
+</body>
+</html>

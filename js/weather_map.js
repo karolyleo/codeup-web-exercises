@@ -1,21 +1,22 @@
 "use strict"
-let weeklyWeather = [];
+let weatherData = [];
+
 $.get("http://api.openweathermap.org/data/2.5/weather", {
     APPID: keys.openWeather,
     q:     "San Antonio, US",
     units: "imperial"
 }).done(function(data) {
     updateToday(data);
-    console.log(data.daily)
     // console.log(data);
 });
+
 $.get("http://api.openweathermap.org/data/2.5/forecast", {
     APPID: keys.openWeather,
     lat:    29.423017,
     lon:   -98.48527,
     units: "imperial"
 }).done(function(data) {
-    weeklyWeather = data
+    weatherData = data //this is so I can reference the data in the console
     updateWeekly(data.list)
 });
 
@@ -29,7 +30,7 @@ let map = new mapboxgl.Map({
     center: latLongSA //starting position in San Antonio
 })
 
-//Functions
+//button to reveal map & change page layout
 $('#mapBtn').click(function(){
     $('#weatherBoxes').toggleClass('flex-column');
     $('#mapDiv').toggleClass('visually-hidden')
@@ -41,11 +42,10 @@ function updateToday(info){
 
     $('h2').children('strong').html(currentTemp + '°F');
     $('#locationName').html(info.name);
-
     // console.log(currentTemp, info.name); //.main.temp for current temp & .name for location
 }
 
-//updating third card
+//updating second card
 function updateWeekly(weeklyInfo){
     $('#weeklyTemp').empty()
     for(let i=0; i<weeklyInfo.length;i+=8){

@@ -1,18 +1,32 @@
-.gradient-custom {
-    /* Chrome 10-25 */
-    background: -webkit-linear-gradient(to right, rgba(255, 255, 255, 1), rgba(255, 236, 210, 1));
-
-    /* Chrome 26+ */
+.gradient-lighter {
     background: linear-gradient(to right, rgba(255, 255, 255, 1), rgba(255, 236, 210, 1))
 }
 
 #map {
     /* the width and height may be set to any size */
-    height: 75%;
-    width: 75%;
+    height: 100%;
+    width: 100%;
     flex-grow: 1;
+}
+
+.coordinates {
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    position: absolute;
+    top: 40px;
+    right: 10px;
+    padding: 5px 10px;
+    margin: 0;
+    font-size: 11px;
+    line-height: 18px;
+    border-radius: 3px;
+    display: none;
 }
 
 .rounded-custom {
     border-radius: 25px;
+}
+
+.text-xs {
+    font-size: .5rem;
 }

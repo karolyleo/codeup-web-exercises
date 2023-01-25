@@ -74,7 +74,7 @@ map.on('load', () => {
 });
 
 let weatherData = {
-    updatePage : function (city) {
+    updatePage: function (city) {
         $.get("http://api.openweathermap.org/data/2.5/weather", {
             APPID: keys.openWeather,
             q: city,
@@ -95,11 +95,11 @@ let weatherData = {
             APPID: keys.openWeather,
             q: city,
             units: "imperial"
-        }).done(function(data) {
+        }).done(function (data) {
             updateWeekly(data.list);
         });
     },
-    updatePageCoord : function (coord) {
+    updatePageCoord: function (coord) {
         //for today's weather
         $.get("http://api.openweathermap.org/data/2.5/weather", {
             APPID: keys.openWeather,
@@ -122,7 +122,7 @@ let weatherData = {
             lon: coord.lng.toFixed(3),
             lat: coord.lat.toFixed(3),
             units: "imperial"
-        }).done(function(data) {
+        }).done(function (data) {
             updateWeekly(data.list);
         });
     }
@@ -130,24 +130,24 @@ let weatherData = {
 weatherData.updatePage('San Antonio');
 
 //btn or enter to update the page for city search
-$("#searchButton").click(function(){
+$("#searchButton").click(function () {
     weatherData.updatePage($('#citySearch').val());
 })
-$('#citySearch').on('keypress', function(e){
-    if(e.which === 13){ //This is so it ony works on 'enter' key
+$('#citySearch').on('keypress', function (e) {
+    if (e.which === 13) { //This is so it ony works on 'enter' key
         weatherData.updatePage($('#citySearch').val());
     }
 });
 
 //btn for populating map
-$('#mapBtn').click(function(){
+$('#mapBtn').click(function () {
     $('#weatherBoxes').toggleClass('flex-column');
     $('#mapDiv').toggleClass('visually-hidden');
     map.resize();
 });
 
 //This is to update the first card inputs
-function updateToday(info){
+function updateToday(info) {
     let currentTemp = info.main.temp.toFixed(0),
         temp = info.main.temp_min + '°F / ' + info.main.temp_max + '°F';
 
@@ -159,16 +159,16 @@ function updateToday(info){
           <p class="mb-0 text-xs text-muted">${info.weather[0].description}</p>
           <p class="mb-0 text-xs"><strong>${temp}</strong></p>
           <p class="mb-0 text-xs text-muted">Wind(mph) /  Pressure(hPa)</p>
-          <p class="mb-0 text-xs"><strong>${info.wind.speed + '  /  '+ info.main.pressure}</strong></p>
+          <p class="mb-0 text-xs"><strong>${info.wind.speed + '  /  ' + info.main.pressure}</strong></p>
             <p class="mb-0 text-xs text-muted">Humidity: <strong class="small">${info.main.humidity}%</strong></p>`
     )
     // console.log(currentTemp, info.name); //.main.temp for current temp & .name for location
 }
 
 //updating second card
-function updateWeekly(weeklyInfo){
+function updateWeekly(weeklyInfo) {
     $('#weeklyTemp').empty();
-    for(let i=7; i<weeklyInfo.length;i+=8){
+    for (let i = 7; i < weeklyInfo.length; i += 8) {
         let date = weeklyInfo[i].dt_txt.split(' '),
             temp = weeklyInfo[i].main.temp_min + '°F / ' + weeklyInfo[i].main.temp_max + '°F',
             dayOfTheWeek = getDayAbbr(date[0]);
@@ -180,7 +180,7 @@ function updateWeekly(weeklyInfo){
           <p class="mb-0 text-xs text-muted">${weeklyInfo[i].weather[0].description}</p>
           <p class="mb-0 text-xs"><strong>${temp}</strong></p>
           <p class="mb-0 text-xs text-muted">Wind(mph) /  Pressure(hPa)</p>
-          <p class="mb-0 text-xs"><strong>${weeklyInfo[i].wind.speed + '  /  '+ weeklyInfo[i].main.pressure}</strong></p>
+          <p class="mb-0 text-xs"><strong>${weeklyInfo[i].wind.speed + '  /  ' + weeklyInfo[i].main.pressure}</strong></p>
           <p class="mb-0 text-xs text-muted">Humidity: <strong class="small">${weeklyInfo[i].main.humidity}%</strong></p>
         </div>`)
     }
@@ -198,7 +198,7 @@ function getDayAbbr(date) {
         "Sat": "Sat"
     }
     let dateObject = new Date(date);
-    let options = { timeZone: 'UTC', weekday: 'short'};
+    let options = {timeZone: 'UTC', weekday: 'short'};
     let day = new Intl.DateTimeFormat('en-US', options).format(dateObject);
     return daysAbbr[day];
 }
@@ -215,6 +215,7 @@ function onMove(e) {
     geojson.features[0].geometry.coordinates = [coords.lng, coords.lat];
     map.getSource('point').setData(geojson);
 }
+
 function onUp(e) {
     let coords = e.lngLat;
 

@@ -1,14 +1,16 @@
-.gradient-lighter {
-    background: linear-gradient(to right, rgba(255, 255, 255, 1), rgba(255, 236, 210, 1))
+/*Global*/
+section {
+    background-color: #C1CFEA;
 }
 
+/*IDs*/
 #map {
-    /* the width and height may be set to any size */
     height: 100%;
     width: 100%;
     flex-grow: 1;
 }
 
+/*Classes*/
 .coordinates {
     background: rgba(0, 0, 0, 0.5);
     color: #fff;
@@ -21,6 +23,10 @@
     line-height: 18px;
     border-radius: 3px;
     display: none;
+}
+
+.gradient-lighter {
+    background: linear-gradient(to right, rgba(255, 255, 255, 1), rgba(255, 236, 210, 1))
 }
 
 .rounded-custom {

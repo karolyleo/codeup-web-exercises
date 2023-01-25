@@ -142,7 +142,7 @@ $('#citySearch').on('keypress', function (e) {
 //btn for populating map
 $('#mapBtn').click(function () {
     $('#weatherBoxes').toggleClass('flex-column');
-    $('#mapDiv').toggleClass('visually-hidden');
+    $('#mapDiv').toggleClass('invisible');
     map.resize();
 });
 

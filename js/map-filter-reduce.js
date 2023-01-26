@@ -68,3 +68,14 @@ let longestEmail = users.reduce((longEmail, user)=>{
 let nameList = users.reduce((names, user)=>{
     return `${names} ${user.name}`
 }, 'Your instructors are: ')
+
+// Bonus
+// Use .reduce to get the unique list of languages from the list of users.
+let languageList = users.reduce((languages, user) => {
+    user.languages.forEach((language) => {
+        if(languages.indexOf(language) === -1){
+            languages += `${language} `;
+        }
+    });
+    return languages;
+}, "");

@@ -51,6 +51,7 @@ let emailList = users.map((user)=>{
 let totalExp = users.reduce((sum, user)=>{
     return sum + user.yearsOfExperience;
 },0)
+let avgExp = totalExp / users.length
 
 // 5 - Use .reduce to get the longest email from the list of users.
 let longestEmail = users.reduce((longEmail, user)=>{

@@ -86,36 +86,55 @@ civilServant = arrNameAge(civilServant) //for the same properties
 // console.log(civilServant);
 
 // PROBLEM 4 - determine the average age of customers
-let averageAge = customers.reduce( (sum, customer) => {
+let averageAge = (objArr = customers) => {return objArr.reduce( (sum, customer) => {
     let { age } = customer;
-    return ( customer === customers[ customers.length - 1 ] ) ? ((sum + age) / customers.length): (sum += age);
-}, 0 )
-// console.log(averageAge)
+    return ( customer === objArr[ objArr.length - 1 ] ) ? ((sum + age) / objArr.length): (sum += age);
+}, 0 )}
+// console.log(averageAge())
 
 // PROBLEM 5 - create a function makeSuperPet() that takes in the pets array as input and returns a single pet object
 // with the following shape...
-/*
-
-    {
+function makeSuperPet(objArr = pets){
+    return {
+        name: objArr.map( ( animal ) => { return animal.name } ).join('-'),
+        age: averageAge(objArr),
+        breed: objArr.map( ( animal ) => { return animal.breed[0] } ).join('.')
+    };
+}
+// console.log(makeSuperPet())
+/* {
         name: ALL_PET_NAMES_CONCATENATED_INTO_A_SINGLE_STRING,
         age: THE_TOTAL_OF_ALL_PET_AGES,
         breed: THE_FIRST_LETTERS_OF_ALL_PET_BREEDS_CONCATENATED_INTO_A_SINGLE_STRING
-    }
+    }  */
 
- */
+// PROBLEM 6 - take in an array of pets and return an array of the length of first names for pugs only your output for the given input should be [3, 6] for 'Bud' and 'Bowser'
+let pugNames = pets.filter( ( pet ) => { return ( pet.breed === 'Pug' ) } ).map( ( pet ) => { return pet.name.length } )
+// console.log(pugNames)
 
-// PROBLEM 6 - take in an array of pets and return an array of the length of first names for pugs only
-// your output for the given input should be [3, 6] for 'Bud' and 'Bowser'
+// PROBLEM 7 - create a function getFemaleFamilyMembers() that when given the family variable as an argument, returns an array of female family member names
+function getFemaleFamilyMembers( objArr = family ) {
+    return objArr.filter( ( familyMember ) => { return familyMember.gender === 'female' } ).map( ( famMem ) => { return famMem.name } )
+}
+// console.log(getFemaleFamilyMembers())
 
-
-// PROBLEM 7 - create a function getFemaleFamilyMembers() that when given the family variable as an argument,
-// returns an array of female family member names
-
-// PROBLEM 8 - create a function makeLongPetString() that when given the variable of pets,
-// returns a string of all property values with dashes separating each property value
+// PROBLEM 8 - create a function makeLongPetString() that when given the variable of pets, returns a string of all property values with dashes separating each property value
+function makeLongPetString( objArr = pets ) {
+    return {
+        name: objArr.map( ( pet ) => {return pet.name} ).join('-'),
+        age: objArr.map( ( pet ) => {return pet.age} ).join('-'),
+        breed: objArr.map( ( pet ) => {return pet.breed} ).join('-')
+    };
+}
+// console.log(makeLongPetString());
 
 // PROBLEM 9 - create a function that when given an array of first names, returns an array of the same names with a last name of Smith
-
+function smithMachine( nameArr = ['Sally', 'Fred', 'Steve'] ) {
+    return nameArr.map( ( name ) => {
+        return `${name} Smith`
+    } )
+}
+// console.log( smithMachine( pets.map( ( pet ) => { return pet.name } ) ) );
 // input = ['Sally', 'Fred', 'Steve']
 // output = ['Sally Smith', 'Fred Smith', 'Steve']
 

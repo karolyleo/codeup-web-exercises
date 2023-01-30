@@ -48,10 +48,11 @@ let emailList = users.map((user)=>{
 })
 
 // 4 - Use .reduce to get the total years of experience from the list of users. Once you get the total of years you can use the result to calculate the average.
-let totalExp = users.reduce((sum, user)=>{
-    return sum + user.yearsOfExperience;
-},0)
-let avgExp = totalExp / users.length
+let avgExp = users.reduce((totalExp, user)=>{
+    let { yearsOfExperience } = user;
+    return ( user === users[ users.length - 1 ] ) ? ( ( totalExp + yearsOfExperience ) / users.length ) : ( totalExp += yearsOfExperience );
+},0);
+// console.log(avgExp)
 
 // 5 - Use .reduce to get the longest email from the list of users.
 let longestEmail = users.reduce((longEmail, user)=>{
@@ -67,9 +68,9 @@ let longestEmail = users.reduce((longEmail, user)=>{
 
 // 6 - Use .reduce to get the list of user's names in a single string. Example: Your instructors are: ryan, luis, zach, fernando, justin.
 let nameList = users.reduce((names, user)=>{
-    return `${names} ${user.name}`
-}, 'Your instructors are: ')
-
+    return `${names} ${user.name},`
+}, 'Your instructors are:')
+nameList = nameList.slice(0, nameList.length-1)+"."
 // Bonus
 // Use .reduce to get the unique list of languages from the list of users.
 let languageList = users.reduce((languages, user) => {

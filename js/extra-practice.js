@@ -140,6 +140,9 @@ function smithMachine( nameArr = ['Sally', 'Fred', 'Steve'] ) {
 
 
 // PROBLEM 10 - create a function that when given an array of numbers, returns the sum of even numbers
+function sum( numArr = [2, 5, 7, 3, 2] ) {
+
+}
 
 // PROBLEM 11 - create a function that when given an array of numbers, returns the sum of all numbers evenly divisible by 10
 

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM Warmups</title>
+    <link href="./bootstrap-grid-example_files/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+</head>
+<body class="container">
+<div class="d-flex align-items-center justify-content-center vh-100">
+    <button id="backgroundColor" class="btn btn-large btn-outline-info">Background Color</button>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script>
+    "use strict"
+    $('#backgroundColor').click( ()=>{
+        $('body').toggleClass('bg-danger')
+    } )
+</script>
+</body>
+</html>

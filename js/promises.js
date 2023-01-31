@@ -8,11 +8,14 @@ const events = async (username) => {
     findLatestCommit(events);
 };
 
+wait(1000).then((time) => console.log(`You'll see this after ${time / 1000} seconds`));
+wait(3000).then((time) => console.log(`You'll see this after ${time / 1000} seconds`));
+
+
 document.getElementById("searchButton").addEventListener("click", function() {
     events(document.getElementById("usernameSearch").value);
     console.log('search was pressed', document.getElementById("usernameSearch").value)
 });
-
 document.getElementById("usernameSearch").addEventListener("keypress", function(e) {
     if (e.which === 13) {
         events(document.getElementById("usernameSearch").value);
@@ -21,9 +24,19 @@ document.getElementById("usernameSearch").addEventListener("keypress", function(
 });
 
 async function getGitHubEvents(username = 'karolyleo') {
-    const response = await fetch(`https://api.github.com/users/${username}/events/public`);
-    const data = await response.json();
-    return data;
+    const url = `https://api.github.com/users/${username}/events/public`
+    const options = {
+        headers: {
+            'Authorization': `token ${keys.github}`
+        }
+    }
+    const response = await fetch(url, options)
+        .then(res => res.json())
+        .then(data => {
+            const pushEvents = data.filter(event => event.type = 'PushEvent')
+            return pushEvents
+        })
+    return response;
 }
 
 function findLatestCommit(events) {
@@ -41,4 +54,12 @@ function findLatestCommit(events) {
         <div class="d-flex align-items-center flex-direction-row"> <h6 class="text-danger"> when: </h6> <p>${created_at}</p>    </div>
         <div class="d-flex align-items-center flex-direction-row"> <h6 class="text-danger"> url: </h6> <p>${repo.url}</p>  </div>`;
     console.log(result);
+}
+
+function wait(milliseconds) {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve(milliseconds);
+        }, milliseconds);
+    });
 }

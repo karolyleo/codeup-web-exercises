@@ -1,94 +1,67 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Hello, World!</title>
-    <link rel="stylesheet" href="css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
 
+        .flip-card {
+            background-color: transparent;
+            width: 300px;
+            height: 300px;
+            perspective: 1000px;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        }
+
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+
+        .flip-card-front {
+            background-color: #bbb;
+            color: black;
+        }
+
+        .flip-card-back {
+            background-color: #2980b9;
+            color: white;
+            transform: rotateY(180deg);
+        }
+    </style>
 </head>
 <body>
-<header>
-<!--    <img src="img/high-five.jpeg"/>-->
-  <h1 class="fancy-header">Welcome to Veridian Dynamics!</h1>
-    <p>At Verdidian Dynamics, <b>we</b> solve <i>your</i> problems with <i><b>technology.</b></i></p>
-    <hr>
-</header>
-<div class="bullets">
-    <h2>Core Values</h2>
-    <ul class="fancybullet">
-        <li>Competence</li>
-        <li>Involvement</li>
-        <li>Technology</li>
-    </ul>
-    <h2>Our Process</h2>
-    <ol class="orderIsNeeded">
-        <li>Plan</li>
-        <li>Evaluate</li>
-        <li>Implement</li>
-    </ol>
-    <h2>2020 Vision</h2>
-    <ul class="fancybullet">
-        <li>Become #1 in Technology</li>
-        <li>Increase Success by 20%</li>
-        <li>Increase Business by 30%</li>
-    </ul>
-    <hr>
+<div class="flip-card">
+    <div class="flip-card-inner">
+        <div class="flip-card-front">
+            <img src="https://m.media-amazon.com/images/M/MV5BMTQ1OTU0ODcxMV5BMl5BanBnXkFtZTcwOTMxNTUwOA@@._V1_SX300.jpg" alt="Avatar" style="width:300px;height:300px;">
+        </div>
+        <div class="flip-card-back">
+            <h1>John Doe</h1>
+            <p>Architect & Engineer</p>
+            <p>We love that guy</p>
+        </div>
+    </div>
 </div>
-<p2>
-    <h2>Company Vision</h2>
-    <table>
-        <tr>
-            <th>
-                <img src="img/pexels-hasan-albari-1229861.jpg" alt="Conference" width="600" height="450"/>
-            </th>
-            <th>
-                <br>
-                <br>
-                <br>
-                <img src="img/pexels-thái-huỳnh-3998365.jpg" alt="Laptop" width="600" height="400"/>
-            </th>
-        </tr>
-        <tr>
-            <th>
-                <img src="img/pexels-sebastian-arie-voortman-189349.jpg" alt="Conference" width="600" height="450"/>
-            </th>
-            <th>
-                <img src="img/pexels-cottonbro-studio-6803523.jpg" alt="Conference" width="600" height="450"/>
-            </th>
-        </tr>
-    </table>
-</p2>
-<p3>
-    <h1>Our Product</h1>
-    <table>
-        <tr>
-            <th>Plan</th>
-            <th>Price</th>
-            <th>Features</th>
-        </tr>
-        <tr>
-            <td>Starter</td>
-            <td>$99</td>
-            <td>Base Technology</td>
-        </tr>
-        <tr>
-            <td>Advanced</td>
-            <td>$199</td>
-            <td>Additional Features</td>
-        </tr>
-        <tr>
-            <td>Premium</td>
-            <td>$499</td>
-            <td>Unlimited Support</td>
-        </tr>
-    </table>
-    <br>
-    <i>All products come with our quality gaurantee™.</i>
-</p3>
-<p4>
-    <br>
-    <br>
-    <a class="top" href="#top"><b>Go to the top of the page.</b></a>
-</p4>
+
 </body>
 </html>

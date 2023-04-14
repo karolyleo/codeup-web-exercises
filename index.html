@@ -1,96 +1,126 @@
-<!doctype html>
-<html>
-  <head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jasmine/3.1.0/jasmine.css">
-    <link rel="stylesheet" href="css/style.css">
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-120907291-1"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Weather</title>
+    <!--    Bootstrap-->
+    <link href="./bootstrap-grid-example_files/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!--    MapBox Custom CSS-->
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet'/>
+    <!-- Custom Weather Map CSS-->
+    <link href="css/weather_map.css" rel="stylesheet"/>
+</head>
+<body>
+<section class="vh-100">
+    <!-- Weather Cards-->
+    <div class="container py-5 h-25">
 
-      gtag('config', 'UA-120907291-1');
-    </script>
+        <!--This div determines the page layout-->
+        <div id="weatherBoxes" class="flex-column d-flex justify-content-evenly align-items-center h-20">
 
-  </head>
-  <body>
-    
-    <main>
-      <h1>
-        Ten Functions!
-        <br>
-          <a id="remix" href="https://glitch.com/edit/#!/remix/ten-functions"><img src="https://cdn.glitch.com/2703baf2-b643-4da7-ab91-7ee2a2d00b5b%2Fremix-button.svg" alt="Remix on Glitch" /></a>
-      </h1>
-        <p>
-          "Ten Functions" is a prepared environment to practice writing JS functions to solve written specifications.
-      </p>
-        <h2>
-        Get Started!
-      </h2>
-      <ol>
-        <li>Clone, fork, or click "remix on Glitch" to make your own copy</li>
-        <li>Follow the README.md file for exercise directions and problem specifications</li>
-        <li>Practice writing JavaScript functions by following these 10 challenges</li>
-        <ul>
-          <li>Automated test results show output results on this page.</li>
-          <li>Write your solutions inside of <pre>solutions.js</pre> Edit it <a id="solutions-edit-link" href="">Here</a>.</li>
-          <li>The unit tests in <pre>tests.js</pre>:
-            <ul>
-              <li>Run automated tests on your provided solutions</li>
-              <li>Test output turns from red to green as your solutions satisfy requirements</li>
-              <li>Start red because there is no code inside of the solutions yet</li>
-            </ul>
-          </li>
-        </ul>
-        <img src="https://cdn.glitch.com/02073022-2df9-4d98-be8d-abf50f7837e5%2Fsmall-function.png?1529106496333" alt="generic-function-diagram">  
-        
-        <p>
-          Tests provide feedback  
-        </p>
-        <p>
-          Feedback improves practice
-        </p>
-        <p>
-          Practice improves performance
-        </p>
-        
-        
-        <section>
-          
-          Practicing with "Ten Functions" will make you better at reading prompts, problem statements, and specifications. 
-          </section>
-        <section>
-          Turning the red tests green by writing accurate function definitions will make you better able to take problems and write your own functions.
-        </section>
-      </ol>
+            <!--First Card of current location/weather-->
+            <div class="card mb-4 gradient-lighter w-25 rounded-custom">
+                <div class="card-body p-4">
+                    <div id="today" class="container ">
+                        <div class="d-flex justify-content-between  m-auto pb-2">
+                            <!--                           Organizing the elements-->
+                            <div>
+                                <h2 class="display-4"><strong>110°F</strong></h2>
+                                <p id="locationName" class="text-muted mb-0">Welcome to default template!</p>
+                            </div>
+                            <p id="weatherType" class="m-0 small align-self-end">Weather Stuff Here</p>
 
-      <h2>
-        The "Ten Functions" Test results 👟  
-      </h2>
-    
-        <a href="./readme.html" id="home">Read the README</a>
-      
-      <ul>
-        
-        <li>Function definitions that pass test assertions turn red tests green, indicating their correctness</li>
-        <li>See "Spec List" for overview data and "Failures" for more detailed test output</li>  
-      </ul>
-    
-        </main>
-    <!-- Jasmine (The test runner) -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/3.1.0/jasmine.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/3.1.0/jasmine-html.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/3.1.0/boot.js"></script>          
-    
-    <!-- automated tests (the test file) -->
-    <script src="./tests.js" type="text/javascript"></script>
+                        </div>
+                    </div>
 
-    <!-- Your solutions to the  -->
-    <script src="./solutions.js" type="text/javascript" ></script>
+                </div>
+            </div>
 
-    <script src="./client.js" type="text/javascript"></script>
-    
+            <!--Second card, Weekly Weather Temp-->
+            <div class="card mb-4 rounded-custom">
+                <div class="card-body p-3">
+                    <div id="weekTemp" class="d-flex flex-column">
+                        <!-- Weekly Temp -->
+                        <div id="weeklyTemp" class="d-flex justify-content-around text-center pb-2 pt-2">
+                            <div class="flex-column p-1">
+                                <p class="small">21°C</p>
+                                <p class="mb-0">Mon</p>
+                            </div>
+                            <div class="flex-column p-1">
+                                <p class="small">20°C</p>
+                                <p class="mb-0">Tue</p>
+                            </div>
+                            <div class="flex-column p-1">
+                                <p class="small">16°C</p>
+                                <p class="mb-0">Wed</p>
+                            </div>
+                            <div class="flex-column p-1">
+                                <p class="small">17°C</p>
+                                <p class="mb-0">Thu</p>
+                            </div>
+                            <div class="flex-column p-1">
+                                <p class="small">18°C</p>
+                                <p class="mb-0">Fri</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-  </body>
+            <!--Third Card, Weather input & map btn-->
+            <div class="card mb-4 rounded-custom">
+                <div class="card-body p-3">
+                    <div class="container">
+                        <!-- Time Table -->
+                        <div class="d-flex justify-content-center flex-column pb-3 pt-2">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <button class="btn btn-outline-secondary" type="button" id="searchButton">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                             fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <input id="citySearch" type="text" class="form-control" placeholder="City" aria-label=""
+                                       aria-describedby="searchButton">
+                            </div>
+                            <button id="mapBtn" type="button" class="btn btn-dark btn-large">Map</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!--    Map-->
+    <div id="mapDiv" class="visually-hidden d-flex justify-content-center align-items-end h-75">
+        <div class="card m-4 w-75 h-75 p-4 border border-info bg-white rounded-custom">
+            <div id='map'></div>
+            <pre id="coordinates" class="coordinates"></pre>
+        </div>
+    </div>
+</section>
+
+<!--API Keys-->
+<script src="js/keys.js"></script>
+<!--JQuery-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<!-- Mapbox Geocoder Util Methods-->
+<script src="js/mapbox-geocoder-utils.js"></script>
+<!-- Mapbox JS -->
+<script src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js'></script>
+<!--Bootstrap-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+<!--Popper-->
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<!--Custom JS-->
+<script src="js/weather_map.js"></script>
+</body>
 </html>
